@@ -46,6 +46,9 @@ function generateNewDivGrid(gridSize){
 
 /*
 ===========DEV NOTES=================
+Next, button to reset what is listed (starts out a 16x16). Generates new grid
+based on prompt input
+
 You can use the .replaceChildren() function to remove all children if left
 empty
 
