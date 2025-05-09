@@ -1,0 +1,19 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.grid-container {
+    width: 960px;
+    height: 960px;
+    background-color: beige;
+}
