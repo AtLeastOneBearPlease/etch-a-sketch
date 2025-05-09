@@ -2,7 +2,6 @@
     margin: 0px;
     padding: 0px;
     font-family: 'roboto', sans-serif;
-    box-sizing: border-box;
 }
 
 body {
@@ -15,5 +14,14 @@ body {
 .grid-container {
     width: 960px;
     height: 960px;
-    background-color: beige;
+    border: 2px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid black;
+    min-width: 240px;
 }
