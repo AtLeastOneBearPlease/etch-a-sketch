@@ -1,8 +1,8 @@
-let gridSize = 0;
+let gridSize = 16;
 let acceptableSize = false;
 
 while(!acceptableSize){
-    gridSize = prompt("Please provide a size of grid, no greater than 100");
+    //gridSize = prompt("Please provide a size of grid, no greater than 100");
 
     if(gridSize > 100){
         alert('Grid size cannot be greater than 100');
