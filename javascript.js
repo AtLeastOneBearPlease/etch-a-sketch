@@ -18,6 +18,8 @@ function generateDivGrid(gridSize){
     for(let i = 0; i < gridSize * gridSize; i++){
         let newDiv = document.createElement('div');
         newDiv.className = 'grid-item';
+        newDiv.setAttribute('data-hovered', 'no');
+        newDiv.setAttribute('data-number-of-hovers', '0');
         newDiv.style.minWidth = divWidth + 'px'; //minWidth to force wrap for grid
         docFragment.appendChild(newDiv);
     }
