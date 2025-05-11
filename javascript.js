@@ -48,7 +48,11 @@ function promptUserForGridSize(){
 
 function sketchGridItem(event){
     if(event.target.className === 'grid-item'){
-        event.target.style.backgroundColor = 'black';
+        let color = generateRandomColor();
+
+        let colorString = `rgba(${color.get('red')}, ${color.get('green')}, ${color.get('blue')}, 1)`;
+
+        event.target.style.backgroundColor = colorString;
     }
 }
 
@@ -57,17 +61,27 @@ function newGrid(){
     generateDivGrid(promptUserForGridSize());   
 }
 
+function generateRandomColor(){
+    let red = Math.floor( Math.random() * 255);
+    let green = Math.floor( Math.random() * 255);
+    let blue = Math.floor( Math.random() * 255);
+
+    let color = new Map([
+        ["red", red],
+        ["green", green],
+        ["blue", blue]
+    ]);
+
+    return color; 
+}
 
 /*
-===========DEV NOTES=================
+==============DEV NOTES=================
+Add data- tags to the divs to see if they have been hovered and one to see how many hovers they've had
 
-You can use the .replaceChildren() function to remove all children if left
-empty
+Then, if its not been hovered, make a color. If it has, decrease opacity and let black background through
 
-Next up use a function to generate a random color
 Also next use the opacity feature to gradually darken an element. Make the 
 container background black and the foreground divs white. Then reduce opacity
 on each hover until only black shows through
-        
-
 */
