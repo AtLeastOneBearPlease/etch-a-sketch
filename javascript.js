@@ -1,32 +1,10 @@
 let gridSize = 16;
-let acceptableSize = false;
-
-while(!acceptableSize){
-    //gridSize = prompt("Please provide a size of grid, no greater than 100");
-
-    if(gridSize > 100){
-        alert('Grid size cannot be greater than 100');
-        continue;
-    } 
-    else if(gridSize < 2){
-        alert('Grid size cannot be less than 2');
-        continue;
-    }
-    acceptableSize = true;
-} 
 
 let gridContainer = document.querySelector('.grid-container');
 
-gridContainer.appendChild(generateNewDivGrid(gridSize));
-
 gridContainer.addEventListener('mouseover', sketchGridItem);
 
-function sketchGridItem(event){
-    if(event.target.className === 'grid-item'){
-        event.target.style.backgroundColor = 'black';
-    
-    }
-}
+generateNewDivGrid(gridSize);
 
 //generates new div grid, place inside doc fragment, and returns the fragment
 function generateNewDivGrid(gridSize){
@@ -40,8 +18,37 @@ function generateNewDivGrid(gridSize){
         docFragment.appendChild(newDiv);
     }
 
-    return docFragment;
+    gridContainer.replaceChildren();
+    gridContainer.appendChild(docFragment);
 }
+
+function promptUserForGridSize(){
+    let acceptableSize = false;
+    let size;
+
+    while(!acceptableSize){
+        size = prompt("Please provide a size of grid, no greater than 100");
+
+        if(size > 100){
+            alert('Grid size cannot be greater than 100');
+            continue;
+        } 
+        else if(size < 2){
+            alert('Grid size cannot be less than 2');
+            continue;
+        }
+        acceptableSize = true;
+    }
+    
+    return size;
+}
+
+function sketchGridItem(event){
+    if(event.target.className === 'grid-item'){
+        event.target.style.backgroundColor = 'black';
+    }
+}
+
 
 
 /*
