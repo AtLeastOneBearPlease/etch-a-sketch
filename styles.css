@@ -6,9 +6,16 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.reset-button {
+    width: 100px;
+    height: 33px;
+    margin-bottom: 20px;
 }
 
 .grid-container {

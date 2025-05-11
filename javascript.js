@@ -2,12 +2,16 @@ let gridSize = 16;
 
 let gridContainer = document.querySelector('.grid-container');
 
+let button = document.querySelector('.reset-button');
+
+button.addEventListener('click', newGrid);
+
 gridContainer.addEventListener('mouseover', sketchGridItem);
 
-generateNewDivGrid(gridSize);
+generateDivGrid(gridSize);
 
 //generates new div grid, place inside doc fragment, and returns the fragment
-function generateNewDivGrid(gridSize){
+function generateDivGrid(gridSize){
     let divWidth = gridContainer.offsetWidth / gridSize; 
     let docFragment = document.createDocumentFragment();
 
@@ -18,7 +22,6 @@ function generateNewDivGrid(gridSize){
         docFragment.appendChild(newDiv);
     }
 
-    gridContainer.replaceChildren();
     gridContainer.appendChild(docFragment);
 }
 
@@ -49,12 +52,14 @@ function sketchGridItem(event){
     }
 }
 
+function newGrid(){
+    gridContainer.replaceChildren(); //clear grid
+    generateDivGrid(promptUserForGridSize());   
+}
 
 
 /*
 ===========DEV NOTES=================
-Next, button to reset what is listed (starts out a 16x16). Generates new grid
-based on prompt input
 
 You can use the .replaceChildren() function to remove all children if left
 empty
