@@ -1,11 +1,13 @@
+//setup globals for program
 let gridSize = 16;
-
 let gridContainer = document.querySelector('.grid-container');
-
 let button = document.querySelector('.reset-button');
 
-button.addEventListener('click', newGrid);
+//string for data attribute on Divs
+const NUM_HOVERS_ATTRIBUTE = 'data-number-of-hovers'
 
+//Add listeners for etch-a-sketch functions
+button.addEventListener('click', newGrid);
 gridContainer.addEventListener('mouseover', sketchGridItem);
 
 generateDivGrid(gridSize);
@@ -18,8 +20,7 @@ function generateDivGrid(gridSize){
     for(let i = 0; i < gridSize * gridSize; i++){
         let newDiv = document.createElement('div');
         newDiv.className = 'grid-item';
-        newDiv.setAttribute('data-hovered', 'no');
-        newDiv.setAttribute('data-number-of-hovers', '0');
+        newDiv.setAttribute(NUM_HOVERS_ATTRIBUTE, '0');
         newDiv.style.minWidth = divWidth + 'px'; //minWidth to force wrap for grid
         docFragment.appendChild(newDiv);
     }
@@ -49,13 +50,40 @@ function promptUserForGridSize(){
 }
 
 function sketchGridItem(event){
-    if(event.target.className === 'grid-item'){
-        let color = generateRandomColor();
+    let div = event.target;
+    
+    if(div.className === 'grid-item'){
+        let hoverTimes = parseInt(div.getAttribute(NUM_HOVERS_ATTRIBUTE) );
 
-        let colorString = `rgba(${color.get('red')}, ${color.get('green')}, ${color.get('blue')}, 1)`;
+        if(hoverTimes === 0){
+            let color = generateRandomColor();
+            let colorString = `rgba(${color.get('red')}, ${color.get('green')}, ${color.get('blue')}, 1)`;
 
-        event.target.style.backgroundColor = colorString;
+            div.style.backgroundColor = colorString;
+            hoverTimes += 1;
+            div.setAttribute(NUM_HOVERS_ATTRIBUTE, hoverTimes);
+        } 
+        else if(hoverTimes > 0 && hoverTimes <= 10) {
+            let opacity = 1 - (hoverTimes * 0.1); 
+            setOpacityOfDiv(div, opacity);
+
+            hoverTimes += 1;
+            div.setAttribute(NUM_HOVERS_ATTRIBUTE, hoverTimes);
+        } //else, div is completely transparent
     }
+}
+
+function setOpacityOfDiv(div, opacity){
+    let color = div.style.backgroundColor;
+
+    //isolate into the red, green, blue numbers
+    let colorMap = color.substring(color.indexOf('(') + 1, color.length - 1);
+
+    //separate into red, green, blue array
+    colorMap = colorMap.split(',');
+
+    //set color using rgba()
+    div.style.backgroundColor = `rgba(${colorMap[0]}, ${colorMap[1]}, ${colorMap[2]}, ${opacity})`;
 }
 
 function newGrid(){
